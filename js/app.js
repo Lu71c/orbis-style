@@ -3,7 +3,7 @@
  * File: js/app.js
  * 
  * Moduli inclusi:
- * 1. RAM Preloader per asset WebP
+ * 1. RAM Preloader per asset WebP (da uno.webp a nove.webp)
  * 2. Gestione Tier Pricing (Senior vs. Artistic Director)
  * 3. Session Engine (Vassoio Fluttuante, calcolo tempi e prezzi)
  * 4. Diagnostic Advisor 2.0 (Quiz a step e prescrizione)
@@ -14,22 +14,22 @@
  */
 
 document.addEventListener("DOMContentLoaded", () => {
-    // Numero WhatsApp ufficiale dell'Atelier (sostituibile con il numero reale del cliente)
+    // Numero WhatsApp ufficiale dell'Atelier
     const ATELIER_WHATSAPP_NUMBER = "390212345678";
 
     /* ==========================================================================
-       1. RAM PRELOADER (Precaricamento immediato delle 9 foto WebP)
+       1. RAM PRELOADER (Asset numerati da uno.webp a nove.webp)
        ========================================================================== */
     const imageCatalog = [
-        "img/hero-atelier.webp",
-        "img/head-spa-water.webp",
-        "img/balayage-sabbia.webp",
-        "img/brunette-gloss.webp",
-        "img/taglio-sartoriale.webp",
-        "img/trattamento-viso.webp",
-        "img/laminazione-sguardo.webp",
-        "img/suite-privata.webp",
-        "img/prodotti-botanici.webp"
+        "img/uno.webp",
+        "img/due.webp",
+        "img/tre.webp",
+        "img/quattro.webp",
+        "img/cinque.webp",
+        "img/sei.webp",
+        "img/sette.webp",
+        "img/otto.webp",
+        "img/nove.webp"
     ];
 
     const preloadImages = (urls) => {
@@ -322,7 +322,6 @@ document.addEventListener("DOMContentLoaded", () => {
             });
             updateSessionTrayUI();
 
-            // Effetto feedback e scroll fluido al vassoio
             btnApplyVerdict.textContent = "✓ Protocollo Aggiunto!";
             setTimeout(() => {
                 btnApplyVerdict.textContent = "Aggiungi Protocollo alla Seduta";
@@ -377,7 +376,7 @@ document.addEventListener("DOMContentLoaded", () => {
         drawerMaintenance.textContent = data.maintenance;
 
         drawer.classList.remove("hidden");
-        document.body.style.overflow = "hidden"; // Blocca scroll di sfondo
+        document.body.style.overflow = "hidden";
         updateSessionTrayUI();
     };
 
@@ -413,14 +412,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const openBookingModal = () => {
         if (appState.sessionItems.size === 0) return;
 
-        // Imposta la data minima del datepicker su "oggi"
         const todayStr = new Date().toISOString().split("T")[0];
         if (bookingDateInput) {
             bookingDateInput.min = todayStr;
             if (!bookingDateInput.value) bookingDateInput.value = todayStr;
         }
 
-        // Popola la lista riepilogativa interna
         summaryRitualsList.innerHTML = "";
         let totalMinutes = 0;
 
@@ -447,7 +444,6 @@ document.addEventListener("DOMContentLoaded", () => {
     if (btnCloseModal) btnCloseModal.addEventListener("click", closeModal);
     if (modalOverlay) modalOverlay.addEventListener("click", closeModal);
 
-    // Gestione Invio Form WhatsApp
     if (bookingForm) {
         bookingForm.addEventListener("submit", (e) => {
             e.preventDefault();
@@ -470,7 +466,6 @@ document.addEventListener("DOMContentLoaded", () => {
             const stylistTitle = appState.stylistTier === "director" ? "Artistic Director" : "Senior Stylist";
             const formattedDuration = formatMinutesToHours(totalMinutes);
 
-            // Generazione del messaggio tecnico formattato ad alta conversione
             const message = 
 `RICHIESTA APPUNTAMENTO PRIVATO — MAISON BRERA
 ───────────────────────────
@@ -491,7 +486,6 @@ Desidero verificare la disponibilità della postazione e confermare lo slot rise
             const encodedMessage = encodeURIComponent(message);
             const whatsappUrl = `https://wa.me/${ATELIER_WHATSAPP_NUMBER}?text=${encodedMessage}`;
 
-            // Apertura chat WhatsApp in nuova scheda
             window.open(whatsappUrl, "_blank");
             closeModal();
         });
@@ -526,7 +520,6 @@ Desidero verificare la disponibilità della postazione e confermare lo slot rise
             }
         });
 
-        // Chiudi menu al tocco su un'ancora
         mainNav.querySelectorAll("a").forEach((link) => {
             link.addEventListener("click", () => {
                 if (window.innerWidth <= 768) {
@@ -536,6 +529,5 @@ Desidero verificare la disponibilità della postazione e confermare lo slot rise
         });
     }
 
-    // Inizializzazione display iniziale prezzi
     updatePricesDisplay();
 });
