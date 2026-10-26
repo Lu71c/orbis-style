@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Maison Brera | Atelier Privato & Hair-Clinic Milano</title>
+    <meta name="description" content="Salone di lusso e hair-clinic a Milano Brera. Prenota la tua seduta esclusiva con tricocamera 200x, Japanese Head Spa e colorazione bio-tech.">
+    
+    <!-- Preload prioritario dell'immagine Hero per Largest Contentful Paint (LCP) -->
+    <link rel="preload" as="image" href="img/hero-atelier.webp" fetchpriority="high">
+    
+    <!-- Google Fonts: Cormorant Garamond (Editoriale) & Plus Jakarta Sans (UI) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- CSS Esterno -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- 1. Top Bar / Announcement Strip -->
+    <div class="announcement-strip">
+        <p>Atelier Privato su Appuntamento • Via Brera 18, Milano • <strong>Consulenza con Tricocamera 200x Inclusa</strong></p>
+    </div>
+
+    <!-- 2. Header & Navigazione -->
+    <header class="site-header">
+        <div class="header-container">
+            <div class="logo">
+                <a href="#">MAISON BRERA</a>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="#menu-rituali">Menu Rituali</a></li>
+                    <li><a href="#diagnostic-quiz">Diagnostic Quiz</a></li>
+                    <li><a href="#japanese-head-spa">Japanese Head Spa</a></li>
+                    <li><a href="#lookbook">Lookbook</a></li>
+                    <li><a href="#logistica">Orari & Contatti</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <button id="mobile-menu-btn" class="menu-toggle" aria-label="Apri menu">
+                    <span class="hamburger"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- 3. Hero Section Immersiva -->
+        <section id="hero" class="hero-section" style="background-image: url('img/hero-atelier.webp');">
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <span class="badge-location">Milano, Quadrilatero</span>
+                <h1 class="haute-couture-title">Lusso Sartoriale,<br>Scienza Botanica.</h1>
+                <p class="hero-subtitle">Vivi un'esperienza di pura rigenerazione capillare e cutanea nel nostro atelier riservato.</p>
+                <div class="hero-cta-group">
+                    <a href="#menu-rituali" class="btn btn-primary">Configura la Tua Seduta</a>
+                    <a href="#diagnostic-quiz" class="btn btn-outline-light">Avvia Test Diagnostico</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. The Atelier Trust Strip -->
+        <section id="trust" class="trust-strip">
+            <div class="trust-container">
+                <div class="trust-item">
+                    <h3 class="trust-title">Microcamera 200x</h3>
+                    <p class="trust-desc">Diagnosi computerizzata dello stato dello scalpo prima di ogni colore.</p>
+                </div>
+                <div class="trust-item">
+                    <h3 class="trust-title">Clean Bio-Tech</h3>
+                    <p class="trust-desc">Formule botaniche prive di solfati, ammoniaca e siliconi pesanti.</p>
+                </div>
+                <div class="trust-item">
+                    <h3 class="trust-title">Puntualità Svizzera</h3>
+                    <p class="trust-desc">Tempi bloccati con buffer di 15 min per azzerare totalmente l'attesa.</p>
+                </div>
+                <div class="trust-item">
+                    <h3 class="trust-title">VIP Private Cabine</h3>
+                    <p class="trust-desc">Suite singola insonorizzata riservata per privacy assoluta e smart-working.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. Diagnostic Advisor (Quiz) -->
+        <section id="diagnostic-quiz" class="diagnostic-section">
+            <div class="section-header">
+                <h2>Diagnostic Advisor 2.0</h2>
+                <p>Trova il protocollo perfetto per le tue esigenze in 3 semplici passaggi.</p>
+            </div>
+            
+            <div class="quiz-container" id="quiz-engine">
+                <!-- Step 1 -->
+                <div class="quiz-step active" id="step-1">
+                    <h3>1. Qual è il tuo obiettivo principale oggi?</h3>
+                    <div class="quiz-options">
+                        <button class="quiz-btn" data-goal="luce">Schiaritura & Luce Fredda</button>
+                        <button class="quiz-btn" data-goal="detox">Detox & Benessere Cute</button>
+                        <button class="quiz-btn" data-goal="rigenerazione">Rigenerazione Strutturale</button>
+                        <button class="quiz-btn" data-goal="glow">Glass Skin & Sguardo</button>
+                    </div>
+                </div>
+
+                <!-- Step 2 (Nascosto di default) -->
+                <div class="quiz-step hidden" id="step-2">
+                    <h3>2. Qual è lo stato attuale di partenza?</h3>
+                    <div class="quiz-options">
+                        <button class="quiz-btn" data-state="naturale">Naturale / Mai Trattato</button>
+                        <button class="quiz-btn" data-state="trattato">Trattato / Decolorato</button>
+                        <button class="quiz-btn" data-state="sensibile">Cute Sensibile / Anomalie</button>
+                    </div>
+                </div>
+
+                <!-- Step 3 Verdetto (Nascosto di default) -->
+                <div class="quiz-step hidden" id="step-3-result">
+                    <div class="verdict-card">
+                        <span class="verdict-badge">Protocollo Consigliato</span>
+                        <h3 id="verdict-title">Risultato Diagnosi</h3>
+                        <p id="verdict-desc">Analizzando le tue risposte...</p>
+                        <button class="btn btn-primary" id="btn-apply-verdict">Aggiungi Protocollo alla Seduta</button>
+                        <button class="btn-text" id="btn-reset-quiz">Ripeti il test</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. Menu dei Rituali & Servizi -->
+        <section id="menu-rituali" class="menu-section bg-soft">
+            <div class="section-header">
+                <h2>I Nostri Rituali</h2>
+                <p>Componi la tua seduta. I tempi e i costi verranno calcolati automaticamente.</p>
+                
+                <!-- Toggle Tier Pricing Dinamico -->
+                <div class="stylist-toggle-wrapper">
+                    <span class="toggle-label active" id="label-senior">Senior Stylist</span>
+                    <label class="switch">
+                        <input type="checkbox" id="stylist-level-toggle">
+                        <span class="slider round"></span>
+                    </label>
+                    <span class="toggle-label" id="label-director">Artistic Director</span>
+                </div>
+            </div>
+
+            <!-- Filtri Categoria -->
+            <div class="category-filters">
+                <button class="filter-btn active" data-filter="all">Tutti</button>
+                <button class="filter-btn" data-filter="forma">Taglio & Forma</button>
+                <button class="filter-btn" data-filter="colore">Colorazione</button>
+                <button class="filter-btn" data-filter="cura">Cura & Head Spa</button>
+                <button class="filter-btn" data-filter="viso">Viso & Sguardo</button>
+            </div>
+
+            <!-- Grid delle Card Trattamenti -->
+            <div class="rituals-grid">
+                
+                <!-- Card 1 -->
+                <article class="ritual-card" data-category="colore" data-id="balayage-signature" data-name="Balayage Couture & Gloss Schiarente" data-duration="120" data-price-senior="190" data-price-director="245">
+                    <div class="card-header">
+                        <span class="duration-badge">120 min</span>
+                        <h3>Balayage Couture & Gloss</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Schiaritura a mano libera senza ammoniaca con micro-pigmenti freddi e proteine della seta.</p>
+                        <div class="price-display">
+                            <span class="price-value" data-dynamic-price>€ 190</span>
+                        </div>
+                    </div>
+                    <div class="card-actions">
+                        <button class="btn-text btn-info" onclick="openDrawer('balayage-signature')">Scheda Tecnica</button>
+                        <button class="btn btn-outline-dark btn-add">Aggiungi</button>
+                    </div>
+                </article>
+
+                <!-- Card 2 -->
+                <article class="ritual-card" data-category="forma" data-id="taglio-architettonico" data-name="Taglio Sartoriale & Piega Memory" data-duration="60" data-price-senior="75" data-price-director="95">
+                    <div class="card-header">
+                        <span class="duration-badge">60 min</span>
+                        <h3>Taglio Sartoriale</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Analisi morfologica, tecnica a lama asciutta (dry-cut) e styling a caldo protetto con ceramidi.</p>
+                        <div class="price-display">
+                            <span class="price-value" data-dynamic-price>€ 75</span>
+                        </div>
+                    </div>
+                    <div class="card-actions">
+                        <button class="btn-text btn-info" onclick="openDrawer('taglio-architettonico')">Scheda Tecnica</button>
+                        <button class="btn btn-outline-dark btn-add">Aggiungi</button>
+                    </div>
+                </article>
+
+                <!-- Card 3 -->
+                <article class="ritual-card" data-category="cura" data-id="japanese-head-spa" data-name="Scalp Detox & Shiatsu Head Spa" data-duration="45" data-price-senior="85" data-price-director="110">
+                    <div class="card-header">
+                        <span class="duration-badge">45 min</span>
+                        <h3>Japanese Head Spa</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Vapore ozonato, scrub argilla bianca, idro-cascata circolare e digitopressione cranica shiatsu.</p>
+                        <div class="price-display">
+                            <span class="price-value" data-dynamic-price>€ 85</span>
+                        </div>
+                    </div>
+                    <div class="card-actions">
+                        <button class="btn-text btn-info" onclick="openDrawer('japanese-head-spa')">Scheda Tecnica</button>
+                        <button class="btn btn-outline-dark btn-add">Aggiungi</button>
+                    </div>
+                </article>
+
+                <!-- Card 4 -->
+                <article class="ritual-card" data-category="cura" data-id="ricostruzione-k18" data-name="Trattamento Molecolare Bond-Repair" data-duration="30" data-price-senior="60" data-price-director="80">
+                    <div class="card-header">
+                        <span class="duration-badge">30 min</span>
+                        <h3>Ricostruzione Molecolare</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Peptide biomimetico e lipidi purificati per riconnettere le catene cheratiniche spezzate in profondità.</p>
+                        <div class="price-display">
+                            <span class="price-value" data-dynamic-price>€ 60</span>
+                        </div>
+                    </div>
+                    <div class="card-actions">
+                        <button class="btn-text btn-info" onclick="openDrawer('ricostruzione-k18')">Scheda Tecnica</button>
+                        <button class="btn btn-outline-dark btn-add">Aggiungi</button>
+                    </div>
+                </article>
+
+                <!-- Card 5 -->
+                <article class="ritual-card" data-category="viso" data-id="facial-glass-skin" data-name="Bespoke Flash Facial 24K" data-duration="40" data-price-senior="90" data-price-director="120">
+                    <div class="card-header">
+                        <span class="duration-badge">40 min</span>
+                        <h3>Flash Facial 24K</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Acido ialuronico a triplo peso molecolare, foglia d'oro 24K antiossidante, massaggio con Gua Sha.</p>
+                        <div class="price-display">
+                            <span class="price-value" data-dynamic-price>€ 90</span>
+                        </div>
+                    </div>
+                    <div class="card-actions">
+                        <button class="btn-text btn-info" onclick="openDrawer('facial-glass-skin')">Scheda Tecnica</button>
+                        <button class="btn btn-outline-dark btn-add">Aggiungi</button>
+                    </div>
+                </article>
+
+                <!-- Card 6 -->
+                <article class="ritual-card" data-category="viso" data-id="laminazione-sguardo" data-name="Laminazione Cheratina Ciglia & Arcata" data-duration="50" data-price-senior="80" data-price-director="105">
+                    <div class="card-header">
+                        <span class="duration-badge">50 min</span>
+                        <h3>Laminazione Sguardo</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Complesso vitaminico infuso, curvatura con silicone anatomico, tinta scura effetto mascara permanente.</p>
+                        <div class="price-display">
+                            <span class="price-value" data-dynamic-price>€ 80</span>
+                        </div>
+                    </div>
+                    <div class="card-actions">
+                        <button class="btn-text btn-info" onclick="openDrawer('laminazione-sguardo')">Scheda Tecnica</button>
+                        <button class="btn btn-outline-dark btn-add">Aggiungi</button>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- 7. Focus: Japanese Scalp Head Spa -->
+        <section id="japanese-head-spa" class="feature-section">
+            <div class="feature-image">
+                <img src="img/head-spa-water.webp" alt="Cascata circolare Japanese Head Spa" loading="lazy">
+            </div>
+            <div class="feature-content">
+                <h2>Il Rituale più Richiesto.</h2>
+                <p>Non un semplice lavatesta, ma una terapia polisensoriale che unisce la tricologia occidentale alle tecniche di digitopressione orientale.</p>
+                <ul class="step-list">
+                    <li><strong>01.</strong> Analisi HD della cute</li>
+                    <li><strong>02.</strong> Vaporizzazione ozonata dilatante</li>
+                    <li><strong>03.</strong> Cascata circolare d'acqua calda idratante</li>
+                    <li><strong>04.</strong> Massaggio shiatsu ai meridiani cranici</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 8. Lookbook & Visual Proof -->
+        <section id="lookbook" class="lookbook-section bg-soft">
+            <div class="section-header">
+                <h2>Portfolio & Trasformazioni</h2>
+                <p>L'arte della correzione colore e della geometria dei volumi.</p>
+            </div>
+            <div class="lookbook-grid">
+                <figure class="lookbook-item">
+                    <img src="img/balayage-sabbia.webp" alt="Balayage Sabbia Freddo" loading="lazy">
+                    <figcaption>Balayage Sabbia Freddo</figcaption>
+                </figure>
+                <figure class="lookbook-item">
+                    <img src="img/brunette-gloss.webp" alt="Brunette Mirror Gloss" loading="lazy">
+                    <figcaption>Brunette Mirror Gloss</figcaption>
+                </figure>
+                <figure class="lookbook-item">
+                    <img src="img/taglio-sartoriale.webp" alt="Taglio Sartoriale" loading="lazy">
+                    <figcaption>Taglio Sartoriale & Texture</figcaption>
+                </figure>
+                <figure class="lookbook-item">
+                    <img src="img/trattamento-viso.webp" alt="Facial Glass Skin 24K" loading="lazy">
+                    <figcaption>Facial Glass Skin 24K</figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <!-- 9. Private Suite & Bottega (Doppia Colonna) -->
+        <section id="private-suite" class="suite-section">
+            <div class="suite-grid">
+                <div class="suite-box text-box">
+                    <h2>VIP Private Cabine</h2>
+                    <p>Per chi esige privacy totale, lavora in smart working durante il tempo di posa del colore o desidera eseguire trattamenti combinati (es. capelli + viso simultaneamente). Uno spazio insonorizzato ad uso esclusivo.</p>
+                </div>
+                <div class="suite-box image-box">
+                    <img src="img/suite-privata.webp" alt="Cabina Privata VIP" loading="lazy">
+                </div>
+                <div class="suite-box image-box">
+                    <img src="img/prodotti-botanici.webp" alt="Flaconi Bio-Tech in Vetro Ambrato" loading="lazy">
+                </div>
+                <div class="suite-box text-box">
+                    <h2>La Bottega Botanica</h2>
+                    <p>Ogni rituale viene eseguito esclusivamente con le nostre formule bio-tech incapsulate in vetro ambrato protettivo, sviluppate in laboratori svizzeri per garantire purezza e altissime performance.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 10. Social Proof & Notorietà -->
+        <section id="social-proof" class="social-section bg-dark text-inverse">
+            <div class="social-container">
+                <div class="rating-badge">
+                    <span class="stars">★★★★★</span>
+                    <span class="score">4.98 / 5</span>
+                </div>
+                <h2>Eccellenza Certificata</h2>
+                <p>"Il punto di riferimento a Milano per il balayage curativo e la rigenerazione profonda della cute."</p>
+                <div class="reviews-meta">Basato su oltre 240 recensioni certificate. <strong>Top Milan Hair Spa 2026.</strong></div>
+            </div>
+        </section>
+
+        <!-- 11. Logistica & Parcheggio -->
+        <section id="logistica" class="logistics-section">
+            <div class="logistics-container">
+                <div class="logistics-info">
+                    <h2>Orari & Logistica</h2>
+                    <ul class="info-list">
+                        <li><strong>Lun - Mer - Ven:</strong> 09:00 — 19:30</li>
+                        <li><strong>Giovedì (Late Night):</strong> 11:00 — 22:00 <br><small>Speciale piega pre-aperitivo</small></li>
+                        <li><strong>Sabato:</strong> 09:00 — 18:00</li>
+                    </ul>
+                    <div class="transport-info">
+                        <p>📍 <strong>Metropolitana:</strong> MM3 Montenapoleone (4 min a piedi).</p>
+                        <p>🚗 <strong>Parcheggio:</strong> Convenzione con Garage Brera (Via Brera 21), servizio Valet su richiesta.</p>
+                    </div>
+                </div>
+                <div class="logistics-map">
+                    <!-- Placeholder per eventuale mappa iframe Google -->
+                    <div class="map-placeholder">
+                        <span>Mappa Interattiva Brera</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Ufficiale -->
+    <footer class="site-footer bg-dark-surface text-inverse">
+        <div class="footer-content">
+            <div class="footer-brand">MAISON BRERA</div>
+            <p>P.IVA 12345678901 • Cod. CIR 987654321</p>
+            <p>&copy; 2026 The Orbis Project. Tutti i diritti riservati.</p>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a> | <a href="#">Termini di Prenotazione</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ========================================== -->
+    <!-- INTERFACCIA FLOATING & MODALI (Nascosti)   -->
+    <!-- ========================================== -->
+
+    <!-- Vassoio Fluttuante "La Tua Seduta" -->
+    <div id="floating-session-bar" class="floating-bar hidden">
+        <div class="floating-summary">
+            <div class="floating-text">
+                <span class="floating-title">La Tua Seduta (<span id="session-count">0</span>)</span>
+                <span class="floating-time" id="session-time">0h 0m</span>
+            </div>
+            <div class="floating-total">
+                <span class="total-label">Totale stimato</span>
+                <span class="total-price" id="session-total">€ 0</span>
+            </div>
+        </div>
+        <button id="btn-open-booking" class="btn btn-primary">Prenota Slot</button>
+    </div>
+
+    <!-- Modale di Prenotazione (Generatore WhatsApp) -->
+    <div id="booking-modal" class="modal hidden">
+        <div class="modal-overlay" id="modal-overlay"></div>
+        <div class="modal-content">
+            <button id="close-modal" class="btn-close" aria-label="Chiudi modale">×</button>
+            <h2>Riserva il tuo Slot Anti-Attesa</h2>
+            <p class="modal-subtitle">Conferma i dettagli per generare la richiesta prioritaria.</p>
+            
+            <form id="booking-form" class="booking-form">
+                <div class="form-group">
+                    <label for="guest-name">Nome e Cognome</label>
+                    <input type="text" id="guest-name" required placeholder="Es. Ludovica Visconti">
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="booking-date">Data Desiderata</label>
+                        <input type="date" id="booking-date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="booking-time">Fascia Oraria</label>
+                        <select id="booking-time" required>
+                            <option value="Mattina (09:00 - 13:00)">Mattina (09:00 - 13:00)</option>
+                            <option value="Pomeriggio (13:00 - 17:00)">Pomeriggio (13:00 - 17:00)</option>
+                            <option value="Sera (17:00 - 21:00)">Sera (17:00 - 21:00)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="welcome-drink">Carta dei Benvenuti (Inclusa)</label>
+                    <select id="welcome-drink">
+                        <option value="Matcha Latte Bio">Matcha Latte biologico cerimoniale</option>
+                        <option value="Franciacorta Satèn">Calice di Franciacorta Satèn DOCG</option>
+                        <option value="Caffè Monorigine">Caffè monorigine filtrato a mano</option>
+                        <option value="Tisana Ortica">Tisana drenante all'ortica toscana</option>
+                    </select>
+                </div>
+
+                <!-- Riepilogo Tecnico Interno -->
+                <div class="booking-summary-box">
+                    <h4>Riepilogo Tecnico</h4>
+                    <ul id="summary-rituals-list"></ul>
+                    <hr>
+                    <div class="summary-totals">
+                        <span>Durata: <strong id="summary-duration">0h 0m</strong> (+15m buffer)</span>
+                        <span>Stylist: <strong id="summary-stylist">Senior Stylist</strong></span>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-whatsapp w-100">
+                    <span class="wa-icon">✆</span> Conferma e Invia su WhatsApp
+                </button>
+                <button type="button" class="btn btn-text w-100 mt-2">Oppure invia richiesta via Email</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Cassetto Off-Canvas "Scheda Rituale" -->
+    <div id="ritual-drawer" class="drawer hidden">
+        <div class="drawer-overlay" id="drawer-overlay"></div>
+        <div class="drawer-panel">
+            <div class="drawer-header">
+                <h3 id="drawer-title">Nome Trattamento</h3>
+                <button id="close-drawer" class="btn-close" aria-label="Chiudi scheda tecnica">×</button>
+            </div>
+            <div class="drawer-body">
+                <div class="drawer-section">
+                    <h4>Attivi Botanici</h4>
+                    <p id="drawer-ingredients">Descrizione ingredienti...</p>
+                </div>
+                <div class="drawer-section">
+                    <h4>Protocollo Tecnico</h4>
+                    <p id="drawer-protocol">Fasi della lavorazione...</p>
+                </div>
+                <div class="drawer-section">
+                    <h4>Mantenimento a Casa</h4>
+                    <p id="drawer-maintenance">Consigli per il mantenimento...</p>
+                </div>
+            </div>
+            <div class="drawer-footer">
+                <button id="drawer-btn-add" class="btn btn-primary w-100">Aggiungi alla Seduta</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script App -->
+    <script src="js/app.js"></script>
+</body>
+</html>
