@@ -11,7 +11,7 @@
  * 6. Off-Canvas Drawer (Schede Tecniche Rituali)
  * 7. Modale Prenotazione & Generatore Deep-Link WhatsApp
  * 8. Navigazione Mobile
- * 9. Mappa Interattiva Dark Mode (Leaflet.js + CartoDB Dark Matter)
+ * 9. Mappa Interattiva (Leaflet.js + OpenStreetMap Libero Zero-API-Key)
  */
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -527,7 +527,7 @@ Desidero verificare la disponibilità della postazione e confermare lo slot rise
     }
 
     /* ==========================================================================
-       9. MAPPA INTERATTIVA DARK MODE (Leaflet.js + CartoDB Dark Matter)
+       9. MAPPA INTERATTIVA (OpenStreetMap 100% Libera, Zero Requisiti API Key)
        ========================================================================== */
     const mapElement = document.getElementById("atelier-map");
     if (mapElement && typeof L !== "undefined") {
@@ -537,18 +537,17 @@ Desidero verificare la disponibilità della postazione e confermare lo slot rise
         const map = L.map("atelier-map", {
             center: breraCoords,
             zoom: 16,
-            scrollWheelZoom: false, // Evita blocchi nello scrolling della pagina
+            scrollWheelZoom: false,
             zoomControl: true
         });
 
-        // Layer CartoDB Dark Matter per stile dark coerente con l'atelier
-        L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png", {
-            attribution: '&copy; <a href="https://carto.com/">CARTO</a>',
-            subdomains: "abcd",
+        // Layer universale OpenStreetMap (nessuna API key richiesta, illimitato e affidabile)
+        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>',
             maxZoom: 19
         }).addTo(map);
 
-        // Pin personalizzato in stile oro champagne & smeraldo notte
+        // Pin personalizzato in stile oro champagne & salvia scuro
         const customPin = L.divIcon({
             className: "custom-map-pin",
             html: `<div style="
@@ -556,8 +555,8 @@ Desidero verificare la disponibilità della postazione e confermare lo slot rise
                 height: 16px; 
                 background: #c8a96e; 
                 border-radius: 50%; 
-                border: 3px solid #0b1614; 
-                box-shadow: 0 0 14px rgba(200, 169, 110, 0.85);
+                border: 3px solid #1e2b27; 
+                box-shadow: 0 0 12px rgba(200, 169, 110, 0.85);
             "></div>`,
             iconSize: [20, 20],
             iconAnchor: [10, 10],
@@ -567,9 +566,9 @@ Desidero verificare la disponibilità della postazione e confermare lo slot rise
         const marker = L.marker(breraCoords, { icon: customPin }).addTo(map);
 
         marker.bindPopup(`
-            <div style="font-family: 'Plus Jakarta Sans', sans-serif; padding: 4px; color: #1c1815;">
+            <div style="font-family: 'Plus Jakarta Sans', sans-serif; padding: 4px; color: #18221f;">
                 <strong style="font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.15rem; display: block; margin-bottom: 2px;">MAISON BRERA</strong>
-                <span style="font-size: 0.82rem; color: #444;">Via Brera 18, Milano</span><br>
+                <span style="font-size: 0.82rem; color: #53635e;">Via Brera 18, Milano</span><br>
                 <span style="font-size: 0.75rem; color: #c8a96e; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;">Atelier Privato</span>
             </div>
         `).openPopup();
