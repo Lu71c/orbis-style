@@ -11,6 +11,7 @@
  * 6. Off-Canvas Drawer (Schede Tecniche Rituali)
  * 7. Modale Prenotazione & Generatore Deep-Link WhatsApp
  * 8. Navigazione Mobile
+ * 9. Mappa Interattiva Dark Mode (Leaflet.js + CartoDB Dark Matter)
  */
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -180,7 +181,6 @@ document.addEventListener("DOMContentLoaded", () => {
             cumulativePrice += appState.stylistTier === "director" ? item.priceDirector : item.priceSenior;
         });
 
-        // Aggiorna la barra fluttuante
         if (count > 0) {
             floatingBar.classList.remove("hidden");
             sessionCount.textContent = count;
@@ -190,7 +190,6 @@ document.addEventListener("DOMContentLoaded", () => {
             floatingBar.classList.add("hidden");
         }
 
-        // Sincronizza stato pulsanti su tutte le card
         cards.forEach((card) => {
             const id = card.dataset.id;
             const btnAdd = card.querySelector(".btn-add");
@@ -209,7 +208,6 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
 
-        // Sincronizza pulsante dentro al drawer se aperto
         if (appState.activeDrawerId) {
             if (appState.sessionItems.has(appState.activeDrawerId)) {
                 drawerBtnAdd.textContent = "Rimuovi dalla Seduta";
@@ -230,7 +228,6 @@ document.addEventListener("DOMContentLoaded", () => {
         updateSessionTrayUI();
     };
 
-    // Event listener click sui bottoni card "Aggiungi"
     cards.forEach((card) => {
         const btnAdd = card.querySelector(".btn-add");
         if (btnAdd) {
@@ -527,6 +524,55 @@ Desidero verificare la disponibilità della postazione e confermare lo slot rise
                 }
             });
         });
+    }
+
+    /* ==========================================================================
+       9. MAPPA INTERATTIVA DARK MODE (Leaflet.js + CartoDB Dark Matter)
+       ========================================================================== */
+    const mapElement = document.getElementById("atelier-map");
+    if (mapElement && typeof L !== "undefined") {
+        // Coordinate Via Brera 18, Milano
+        const breraCoords = [45.4719, 9.1884];
+
+        const map = L.map("atelier-map", {
+            center: breraCoords,
+            zoom: 16,
+            scrollWheelZoom: false, // Evita blocchi nello scrolling della pagina
+            zoomControl: true
+        });
+
+        // Layer CartoDB Dark Matter per stile dark coerente con l'atelier
+        L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png", {
+            attribution: '&copy; <a href="https://carto.com/">CARTO</a>',
+            subdomains: "abcd",
+            maxZoom: 19
+        }).addTo(map);
+
+        // Pin personalizzato in stile oro champagne & smeraldo notte
+        const customPin = L.divIcon({
+            className: "custom-map-pin",
+            html: `<div style="
+                width: 16px; 
+                height: 16px; 
+                background: #c8a96e; 
+                border-radius: 50%; 
+                border: 3px solid #0b1614; 
+                box-shadow: 0 0 14px rgba(200, 169, 110, 0.85);
+            "></div>`,
+            iconSize: [20, 20],
+            iconAnchor: [10, 10],
+            popupAnchor: [0, -12]
+        });
+
+        const marker = L.marker(breraCoords, { icon: customPin }).addTo(map);
+
+        marker.bindPopup(`
+            <div style="font-family: 'Plus Jakarta Sans', sans-serif; padding: 4px; color: #1c1815;">
+                <strong style="font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.15rem; display: block; margin-bottom: 2px;">MAISON BRERA</strong>
+                <span style="font-size: 0.82rem; color: #444;">Via Brera 18, Milano</span><br>
+                <span style="font-size: 0.75rem; color: #c8a96e; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;">Atelier Privato</span>
+            </div>
+        `).openPopup();
     }
 
     updatePricesDisplay();
