@@ -1,45 +1,48 @@
 /* ==========================================================================
    MAISON BRERA — HAUTE-COUTURE & TRICHOLOGY DESIGN SYSTEM
-   Palette: Deep Emerald, Mineral Silk & Champagne Platinum
+   Palette: Velvety Sage Deep, Mineral Silk & Champagne Platinum
    File: css/style.css
    ========================================================================== */
 
 /* 1. Custom Properties & Variabili Globali */
 :root {
-    /* Fondi: Seta Minerale e Verde Notte Profondo (Distacco netto dal mood caldo di Lumina) */
-    --bg-canvas: #edf0ee;
-    --bg-card: #ffffff;
-    --bg-card-soft: #e1e7e4;
-    --bg-dark: #0b1614;
-    --bg-dark-surface: #132420;
-    --bg-emerald: #0e1e1b;
+    /* Fondi: Seta Minerale, Calce Velata e Salvia Notturno Vellutato (Morbido, elegante, mai cupo) */
+    --bg-canvas: #edf1ef;
+    --bg-card: #f7f9f7; /* Bianco caldo sporcato/seta minerale antiriflesso */
+    --bg-card-soft: #e1e7e4; /* Il verdino/celeste polvere raffinato dei rituali */
+    --bg-card-pure: #ffffff; /* Bianco per piccoli dettagli di stacco e hover */
+    
+    /* Toni Scuri Vellutati (Sostituiscono il nero/verde scuro aggressivo) */
+    --bg-dark: #1e2b27;
+    --bg-dark-surface: #24342f;
+    --bg-sage-deep: #2a3c36; /* Il nuovo fondo vellutato per Quiz, Social Proof e accenti */
+    --bg-emerald: #2a3c36;   /* Alias retrocompatibilità */
 
     /* Tipografia e Contrasti */
-    --text-primary: #121917;
-    --text-muted: #53615d;
-    --text-light: #84948f;
+    --text-primary: #18221f;
+    --text-muted: #53635e;
+    --text-light: #83948f;
     --text-inverse: #f4f7f5;
 
-    /* Accenti: Oro Champagne Platino e Smeraldo Botanico */
+    /* Accenti: Oro Champagne Platino */
     --accent-champagne: #c8a96e;
     --accent-champagne-hover: #b59458;
-    --accent-bronze: #c8a96e; /* Alias compatibilità */
+    --accent-bronze: #c8a96e;
     --accent-bronze-hover: #b59458;
-    --accent-emerald-light: #1f3d35;
 
-    /* Bordi */
-    --border-soft: rgba(18, 25, 23, 0.08);
+    /* Bordi Calibrati */
+    --border-soft: rgba(24, 34, 31, 0.08);
     --border-champagne: rgba(200, 169, 110, 0.35);
-    --border-emerald: rgba(31, 61, 53, 0.4);
+    --border-sage: rgba(42, 60, 54, 0.25);
 
     /* Tipografia */
     --font-serif: "Cormorant Garamond", Georgia, serif;
     --font-sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, sans-serif;
 
-    /* Ombreggiature Architettoniche */
-    --shadow-soft: 0 10px 30px rgba(11, 22, 20, 0.05);
-    --shadow-lift: 0 18px 42px rgba(11, 22, 20, 0.09);
-    --shadow-floating: 0 24px 52px rgba(7, 15, 13, 0.32);
+    /* Ombreggiature Morbide e Diffuse */
+    --shadow-soft: 0 10px 30px rgba(30, 43, 39, 0.05);
+    --shadow-lift: 0 18px 42px rgba(30, 43, 39, 0.08);
+    --shadow-floating: 0 20px 48px rgba(20, 30, 27, 0.22);
 
     --transition-fast: 0.2s ease;
     --transition-smooth: 0.35s cubic-bezier(0.16, 1, 0.3, 1);
@@ -128,8 +131,10 @@ a {
     background-color: var(--bg-dark-surface);
 }
 
+/* Fondo Salvia Notturno Elegante & Morbido */
+.bg-sage-deep,
 .bg-emerald {
-    background-color: var(--bg-emerald);
+    background-color: var(--bg-sage-deep);
 }
 
 .text-inverse,
@@ -193,12 +198,12 @@ a {
 .btn-outline-light {
     background-color: transparent;
     color: var(--text-inverse);
-    border-color: rgba(244, 247, 245, 0.4);
+    border-color: rgba(244, 247, 245, 0.45);
 }
 
 .btn-outline-light:hover {
     border-color: var(--text-inverse);
-    background-color: rgba(244, 247, 245, 0.1);
+    background-color: rgba(244, 247, 245, 0.12);
 }
 
 .btn-outline-dark {
@@ -210,6 +215,7 @@ a {
 .btn-outline-dark:hover {
     border-color: var(--accent-champagne);
     color: var(--accent-champagne);
+    background-color: var(--bg-card);
 }
 
 .btn-text {
@@ -250,7 +256,7 @@ a {
     text-transform: uppercase;
     text-align: center;
     padding: 0.65rem 1rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
 }
 
 .announcement-strip strong {
@@ -263,7 +269,7 @@ a {
     position: sticky;
     top: 0;
     z-index: 100;
-    background-color: rgba(237, 240, 238, 0.94);
+    background-color: rgba(237, 241, 239, 0.94);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
     border-bottom: 1px solid var(--border-soft);
@@ -365,7 +371,7 @@ a {
 .hero-overlay {
     position: absolute;
     inset: 0;
-    background: radial-gradient(circle at center, rgba(11, 22, 20, 0.45) 0%, rgba(11, 22, 20, 0.88) 100%);
+    background: radial-gradient(circle at center, rgba(34, 50, 45, 0.45) 0%, rgba(24, 36, 32, 0.86) 100%);
 }
 
 .hero-content {
@@ -384,7 +390,7 @@ a {
     margin-bottom: 1.25rem;
     padding: 0.35rem 1rem;
     border: 1px solid var(--border-champagne);
-    background-color: rgba(11, 22, 20, 0.55);
+    background-color: rgba(26, 38, 34, 0.6);
 }
 
 .haute-couture-title {
@@ -447,12 +453,12 @@ a {
     line-height: 1.5;
 }
 
-/* 8. Diagnostic Advisor (Stacco Cromatico & Cabina Tecnologica) */
+/* 8. Diagnostic Advisor (Fondo Vellutato & Card Calce Chiara) */
 .diagnostic-section {
     padding: 6.5rem 1.5rem;
     position: relative;
-    border-top: 1px solid var(--border-emerald);
-    border-bottom: 1px solid var(--border-emerald);
+    border-top: 1px solid var(--border-sage);
+    border-bottom: 1px solid var(--border-sage);
 }
 
 .diagnostic-section .section-header h2 {
@@ -460,7 +466,7 @@ a {
 }
 
 .diagnostic-section .section-header p {
-    color: var(--text-light);
+    color: #b7c7c2;
 }
 
 .quiz-container {
@@ -470,7 +476,7 @@ a {
     padding: 3.5rem 2.5rem;
     max-width: 820px;
     margin: 0 auto;
-    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35);
+    box-shadow: 0 20px 50px rgba(18, 28, 25, 0.28);
 }
 
 .quiz-step h3 {
@@ -499,7 +505,7 @@ a {
 
 .quiz-btn:hover {
     border-color: var(--accent-champagne);
-    background-color: #ffffff;
+    background-color: var(--bg-card-pure);
     transform: translateY(-2px);
     box-shadow: var(--shadow-soft);
 }
@@ -666,7 +672,7 @@ input:checked + .slider::before {
 
 .ritual-card.selected {
     border-color: var(--accent-champagne);
-    background-color: #f7f9f8;
+    background-color: #f2f6f4;
 }
 
 .ritual-card .card-header {
@@ -721,7 +727,7 @@ input:checked + .slider::before {
     border-color: var(--bg-dark);
 }
 
-/* 10. Focus: Japanese Scalp Head Spa (Risoluzione Crop Mobile) */
+/* 10. Focus: Japanese Scalp Head Spa */
 .feature-section {
     display: grid;
     grid-template-columns: 1.15fr 1fr;
@@ -776,7 +782,7 @@ input:checked + .slider::before {
     margin-right: 0.5rem;
 }
 
-/* 11. Lookbook & Visual Proof (Riallineamento Card 3 Taglio) */
+/* 11. Lookbook & Visual Proof */
 .lookbook-section {
     padding: 6rem 1.5rem;
 }
@@ -802,7 +808,7 @@ input:checked + .slider::before {
     object-position: center center;
 }
 
-/* Fix specifico per la Card 3: sposta il punto focale sulla modale seduta a destra */
+/* Allineamento mirato per la Card 3: mette la modale al centro */
 .lookbook-item.crop-left img {
     object-position: 85% center;
 }
@@ -817,7 +823,7 @@ input:checked + .slider::before {
     left: 0;
     right: 0;
     padding: 1.25rem 1rem;
-    background: linear-gradient(to top, rgba(11, 22, 20, 0.88) 0%, transparent 100%);
+    background: linear-gradient(to top, rgba(30, 43, 39, 0.88) 0%, transparent 100%);
     color: var(--text-inverse);
     font-size: 0.85rem;
     font-weight: 500;
@@ -858,12 +864,12 @@ input:checked + .slider::before {
     background-color: var(--bg-card-soft);
 }
 
-/* 13. Social Proof & Notorietà (Smeraldo Notte) */
+/* 13. Social Proof & Notorietà (Salvia Notturno Morbido) */
 .social-section {
     padding: 6.5rem 1.5rem;
     text-align: center;
-    border-top: 1px solid var(--border-emerald);
-    border-bottom: 1px solid var(--border-emerald);
+    border-top: 1px solid var(--border-sage);
+    border-bottom: 1px solid var(--border-sage);
 }
 
 .social-container {
@@ -905,10 +911,14 @@ input:checked + .slider::before {
 
 .reviews-meta {
     font-size: 0.85rem;
-    color: var(--text-light);
+    color: #b7c7c2;
 }
 
-/* 14. Logistica & Mappa Interattiva Dark */
+.badge-award {
+    color: var(--accent-champagne);
+}
+
+/* 14. Logistica & Mappa Interattiva (OpenStreetMap Elegante) */
 .logistics-section {
     padding: 6rem 1.5rem;
     max-width: 1280px;
@@ -949,27 +959,32 @@ input:checked + .slider::before {
     gap: 0.6rem;
 }
 
-/* Contenitore Mappa Leaflet Reale */
+/* Contenitore Mappa Leaflet & Filtro Desaturato Sartoriale */
 .interactive-map {
     width: 100%;
     aspect-ratio: 16 / 10;
     min-height: 360px;
     border-radius: 4px;
-    border: 1px solid var(--border-emerald);
-    background-color: var(--bg-dark);
+    border: 1px solid var(--border-soft);
+    background-color: var(--bg-card-soft);
     box-shadow: var(--shadow-soft);
     z-index: 10;
 }
 
-/* Personalizzazione Dark Pop-Up Leaflet */
+/* Filtro elegante su mattonelle OpenStreetMap standard (addio API key) */
+.interactive-map .leaflet-tile-pane {
+    filter: grayscale(85%) contrast(94%) brightness(98%);
+}
+
 .leaflet-popup-content-wrapper {
-    background-color: #ffffff !important;
+    background-color: var(--bg-card) !important;
     border-radius: 2px !important;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.2) !important;
+    box-shadow: var(--shadow-soft) !important;
+    border: 1px solid var(--border-soft);
 }
 
 .leaflet-popup-tip {
-    background-color: #ffffff !important;
+    background-color: var(--bg-card) !important;
 }
 
 /* 15. Footer */
@@ -1016,10 +1031,10 @@ input:checked + .slider::before {
     transform: translateX(-50%);
     width: calc(100% - 3rem);
     max-width: 720px;
-    background-color: rgba(11, 22, 20, 0.92);
+    background-color: rgba(30, 43, 39, 0.94);
     backdrop-filter: blur(18px);
     -webkit-backdrop-filter: blur(18px);
-    border: 1px solid rgba(200, 169, 110, 0.3);
+    border: 1px solid var(--border-champagne);
     box-shadow: var(--shadow-floating);
     padding: 0.85rem 1.5rem;
     border-radius: 6px;
@@ -1098,7 +1113,7 @@ input:checked + .slider::before {
 .modal-overlay {
     position: absolute;
     inset: 0;
-    background-color: rgba(11, 22, 20, 0.8);
+    background-color: rgba(26, 38, 34, 0.78);
     backdrop-filter: blur(8px);
 }
 
@@ -1181,7 +1196,7 @@ input:checked + .slider::before {
 .form-group input:focus,
 .form-group select:focus {
     border-color: var(--accent-champagne);
-    background-color: var(--bg-card);
+    background-color: var(--bg-card-pure);
 }
 
 .booking-summary-box {
@@ -1230,7 +1245,7 @@ input:checked + .slider::before {
 .drawer-overlay {
     position: absolute;
     inset: 0;
-    background-color: rgba(11, 22, 20, 0.7);
+    background-color: rgba(26, 38, 34, 0.7);
     backdrop-filter: blur(5px);
 }
 
@@ -1364,7 +1379,7 @@ input:checked + .slider::before {
         grid-template-columns: 1fr;
     }
 
-    /* Soluzione definitiva al crop della Japanese Head Spa su smartphone verticale */
+    /* Soluzione al crop verticale della Japanese Head Spa */
     .feature-section {
         grid-template-columns: 1fr;
         margin: 4rem auto;
@@ -1377,7 +1392,7 @@ input:checked + .slider::before {
     }
 
     .feature-image img {
-        object-position: center 25%; /* Mantiene sia la cascata d'acqua che il profilo visibili */
+        object-position: center 25%;
     }
 
     .feature-content {
