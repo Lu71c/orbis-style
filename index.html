@@ -14,7 +14,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
     
-    <!-- CSS Esterno -->
+    <!-- CSS Esterno per la Mappa Interattiva (Leaflet) -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    
+    <!-- CSS Esterno Principale -->
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -85,8 +88,8 @@
         </section>
 
         <!-- 5. Diagnostic Advisor (Quiz) -->
-        <section id="diagnostic-quiz" class="diagnostic-section">
-            <div class="section-header">
+        <section id="diagnostic-quiz" class="diagnostic-section bg-emerald">
+            <div class="section-header text-inverse">
                 <h2>Diagnostic Advisor 2.0</h2>
                 <p>Trova il protocollo perfetto per le tue esigenze in 3 semplici passaggi.</p>
             </div>
@@ -297,7 +300,7 @@
                     <img src="img/quattro.webp" alt="Brunette Mirror Gloss" loading="lazy">
                     <figcaption>Brunette Mirror Gloss</figcaption>
                 </figure>
-                <figure class="lookbook-item">
+                <figure class="lookbook-item crop-left">
                     <img src="img/cinque.webp" alt="Taglio Sartoriale" loading="lazy">
                     <figcaption>Taglio Sartoriale & Texture</figcaption>
                 </figure>
@@ -329,7 +332,7 @@
         </section>
 
         <!-- 10. Social Proof & Notorietà -->
-        <section id="social-proof" class="social-section bg-dark text-inverse">
+        <section id="social-proof" class="social-section bg-emerald text-inverse">
             <div class="social-container">
                 <div class="rating-badge">
                     <span class="stars">★★★★★</span>
@@ -337,7 +340,7 @@
                 </div>
                 <h2>Eccellenza Certificata</h2>
                 <p>"Il punto di riferimento a Milano per il balayage curativo e la rigenerazione profonda della cute."</p>
-                <div class="reviews-meta">Basato su oltre 240 recensioni certificate. <strong>Top Milan Hair Spa 2026.</strong></div>
+                <div class="reviews-meta">Basato su oltre 240 recensioni certificate. <strong style="color: var(--accent-champagne);">Top Milan Hair Spa 2026.</strong></div>
             </div>
         </section>
 
@@ -357,9 +360,8 @@
                     </div>
                 </div>
                 <div class="logistics-map">
-                    <div class="map-placeholder">
-                        <span>Mappa Interattiva Brera</span>
-                    </div>
+                    <!-- Vero contenitore mappa interattiva Leaflet -->
+                    <div id="atelier-map" class="interactive-map"></div>
                 </div>
             </div>
         </section>
@@ -482,6 +484,8 @@
         </div>
     </div>
 
+    <!-- Script Leaflet (Mappa) -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <!-- Script App -->
     <script src="js/app.js"></script>
 </body>
