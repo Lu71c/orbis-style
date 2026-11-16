@@ -3,6 +3,7 @@
  * File: js/app.js
  * 
  * Moduli inclusi:
+ * 0. Orbis Privacy-First Analytics Engine (Zero Cookie, Zero IP, GDPR-Free)
  * 1. RAM Preloader per asset WebP (da uno.webp a nove.webp)
  * 2. Gestione Tier Pricing (Senior vs. Artistic Director)
  * 3. Session Engine (Vassoio Fluttuante, calcolo tempi e prezzi)
@@ -17,6 +18,102 @@
 document.addEventListener("DOMContentLoaded", () => {
     // Numero WhatsApp ufficiale dell'Atelier
     const ATELIER_WHATSAPP_NUMBER = "390212345678";
+
+    /* ==========================================================================
+       0. ORBIS PRIVACY-FIRST ANALYTICS ENGINE (Zero Cookie • Zero IP • GDPR-Free)
+       ========================================================================== */
+    const ORBIS_ANALYTICS = (() => {
+        const ENDPOINT = "https://smith-anchor-untoasted.ngrok-free.dev/api/v1/analytics/hit";
+        const SITE_ID = document.body.getAttribute("data-orbis-site") || "maison-brera";
+        const DWELL_MS = 2000; // Soglia minima di permanenza visiva (2 secondi)
+        const trackedSessionKeys = new Set();
+
+        function sendPulse(eventType, targetId, label = "") {
+            if (!SITE_ID || !targetId) return;
+            const params = new URLSearchParams({
+                site_id: SITE_ID,
+                event_type: eventType,
+                target_id: targetId
+            });
+            if (label) params.set("label", label);
+
+            const url = `${ENDPOINT}?${params.toString()}`;
+            try {
+                fetch(url, {
+                    method: "POST",
+                    keepalive: true,
+                    headers: { "ngrok-skip-browser-warning": "true" }
+                }).catch(() => {});
+            } catch (_) {
+                if (navigator.sendBeacon) navigator.sendBeacon(url);
+            }
+        }
+
+        function trackPageView(pageName) {
+            const cleanPage = (pageName || window.location.pathname.split("/").pop() || "index.html").trim();
+            const dedupKey = `orbis_pv_${SITE_ID}_${cleanPage}`;
+            if (sessionStorage.getItem(dedupKey)) return;
+            sessionStorage.setItem(dedupKey, "1");
+            sendPulse("page_view", cleanPage);
+        }
+
+        function observeScrollSections() {
+            const sections = document.querySelectorAll("section[id], [data-orbis-section]");
+            if (!sections.length || !("IntersectionObserver" in window)) return;
+
+            const activeTimers = new Map();
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    const secId = entry.target.getAttribute("data-orbis-section") || entry.target.id;
+                    if (!secId) return;
+
+                    if (entry.isIntersecting) {
+                        if (trackedSessionKeys.has(`sec_${secId}`) || activeTimers.has(secId)) return;
+                        const timerId = setTimeout(() => {
+                            trackedSessionKeys.add(`sec_${secId}`);
+                            activeTimers.delete(secId);
+                            sendPulse("section_view", secId);
+                        }, DWELL_MS);
+                        activeTimers.set(secId, timerId);
+                    } else if (activeTimers.has(secId)) {
+                        clearTimeout(activeTimers.get(secId));
+                        activeTimers.delete(secId);
+                    }
+                });
+            }, { threshold: 0.35 });
+
+            sections.forEach((sec) => observer.observe(sec));
+        }
+
+        function bindClickTracking() {
+            document.addEventListener("click", (e) => {
+                const virtualPageEl = e.target.closest("[data-orbis-page]");
+                if (virtualPageEl) {
+                    trackPageView(virtualPageEl.getAttribute("data-orbis-page"));
+                }
+
+                const trackEl = e.target.closest("[data-orbis-track]");
+                if (trackEl) {
+                    const trackId = trackEl.getAttribute("data-orbis-track");
+                    const trackLabel = trackEl.getAttribute("data-orbis-label") || trackEl.textContent.trim().slice(0, 60);
+                    sendPulse("track_click", trackId, trackLabel);
+                }
+            });
+        }
+
+        return {
+            init() {
+                trackPageView();
+                observeScrollSections();
+                bindClickTracking();
+            },
+            trackCustom(trackId, label) {
+                sendPulse("track_click", trackId, label);
+            }
+        };
+    })();
+
+    ORBIS_ANALYTICS.init();
 
     /* ==========================================================================
        1. RAM PRELOADER (Asset numerati da uno.webp a nove.webp)
@@ -159,10 +256,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 appState.stylistTier = "director";
                 labelSenior.classList.remove("active");
                 labelDirector.classList.add("active");
+                ORBIS_ANALYTICS.trackCustom("listino-artistic-director", "Listino: Artistic Director");
             } else {
                 appState.stylistTier = "senior";
                 labelDirector.classList.remove("active");
                 labelSenior.classList.add("active");
+                ORBIS_ANALYTICS.trackCustom("listino-senior-stylist", "Listino: Senior Stylist");
             }
             updatePricesDisplay();
         });
@@ -288,6 +387,8 @@ document.addEventListener("DOMContentLoaded", () => {
             verdictDesc.textContent = "Protocollo simultaneo viso-sguardo: luminosità ad assorbimento dermico immediato e definizione permanente dell'arcata sopracciliare.";
         }
 
+        ORBIS_ANALYTICS.trackCustom(`quiz-verdetto-${goal || "generico"}`, `Quiz Completato: ${verdictTitle.textContent}`);
+
         step2.classList.add("hidden");
         step3.classList.remove("hidden");
     };
@@ -348,6 +449,7 @@ document.addEventListener("DOMContentLoaded", () => {
             btn.classList.add("active");
 
             const filterValue = btn.dataset.filter;
+            ORBIS_ANALYTICS.trackCustom(`filtro-rituali-${filterValue}`, `Filtro Rituali: ${btn.textContent.trim()}`);
 
             cards.forEach((card) => {
                 if (filterValue === "all" || card.dataset.category === filterValue) {
@@ -471,12 +573,12 @@ Ospite: ${guestName}
 RITUALI SELEZIONATI:
 ${ritualsText}
 DETTAGLI SEDUTA:
-• Livello Stylist: ${stylistTitle}
-• Durata Stimata: ${formattedDuration} (+ 15 min buffer accoglienza)
-• Valore Stimato: € ${totalPrice}
-• Data Desiderata: ${bookingDate}
-• Fascia Oraria: ${bookingTime}
-• Carta dei Benvenuti: ${welcomeDrink}
+- Livello Stylist: ${stylistTitle}
+- Durata Stimata: ${formattedDuration} (+ 15 min buffer accoglienza)
+- Valore Stimato: € ${totalPrice}
+- Data Desiderata: ${bookingDate}
+- Fascia Oraria: ${bookingTime}
+- Carta dei Benvenuti: ${welcomeDrink}
 
 Desidero verificare la disponibilità della postazione e confermare lo slot riservato con analisi tricotest 200x inclusa.`;
 
