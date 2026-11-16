@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
        ========================================================================== */
     const ORBIS_ANALYTICS = (() => {
         const ENDPOINT = "https://smith-anchor-untoasted.ngrok-free.dev/api/v1/analytics/hit";
-        const SITE_ID = document.body.getAttribute("data-orbis-site") || "maison-brera";
+        const SITE_ID = document.body.getAttribute("data-orbis-site") || "orbis-style";
         const DWELL_MS = 2000; // Soglia minima di permanenza visiva (2 secondi)
         const trackedSessionKeys = new Set();
 
